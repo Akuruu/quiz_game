@@ -3,13 +3,15 @@ var quizText = document.querySelector(".quiz");
 var startButton = document.querySelector(".start");
 var win = document.querySelector(".win");
 var lose = document.querySelector(".lose");
+var question = document.querySelector(".question");
 var timer;
 var timeLeft;
 var isWin = false;
 var winNumber = 0;
 var loseNumber = 0;
 //--------------------------------------
-
+//calling the startQuiz function after the start button is pressed
+startButton.addEventListener("click", startQuiz);
 //--------------------------------------
 //what happens when you hit the start button
 function startQuiz () {
@@ -58,5 +60,3 @@ function gameLose() {
 }
 
 //--------------------------
-//calling the startQuiz function after the start button is pressed
-startButton.addEventListener("click", startQuiz);
