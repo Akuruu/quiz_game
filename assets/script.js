@@ -10,6 +10,7 @@ var currentQuestion = {};
 var acceptingAnswers = true;
 var score = 0;
 var questionCounter = 0;
+//new question array
 var availableQuestions = [];
 //-------------------------------------
 var timer;
@@ -25,8 +26,21 @@ startButton.addEventListener("click", startQuiz);
 function startQuiz () {
  timeLeft = 60;
  isWin = false;
+ //score is set to 0
+ score = 0;
+ //creates new array by referring to the existing array of questions
+ availableQuestions = [...questions]
+ console.log(availableQuestions);
  timer()
-
+ nextQuestion()
+}
+//proceeds to the next question
+function nextQuestion() {
+    questionCounter++;
+    //randomizes the questions
+    var qI = Math.floor(Math.random() * availableQuestions.length);
+    currentQuestion = availableQuestions[qI];
+    question.innerHTML = currentQuestion.question;
 }
 
 //timer function
@@ -133,6 +147,23 @@ var questions = [
         choice4: "Illusions",
         answer: 3
     },
+    {
+        question: "What is the name of Luo Binghe's sword?",
+        choice1: "Xiu Ya",
+        choice2: "Suibian",
+        choice3: "Xin Mo",
+        choice4: "Zidian",
+        answer: 3
+    },
+    {
+        question: "In the GusuLan Sect, Which piece of clothing signifies a direct descendant of the Lan bloodline?",
+        choice1: "A White Outer Robe",
+        choice2: "A White Headband with Clouds",
+        choice3: "A Braided Wristlet",
+        choice4: "A Silver Hair Ornament with Dragons",
+        answer: 2
+    },
 ];
 
 const correctPoint = 10;
+const totalQuestions = 10;
