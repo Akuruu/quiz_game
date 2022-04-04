@@ -5,7 +5,7 @@ var win = document.querySelector(".win");
 var lose = document.querySelector(".lose");
 //---------------------------------
 var question = document.querySelector(".question");
-var choices = document.getElementsByClassName(".choice-text");
+var choices = Array.from(document.getElementsByClassName("choice-text"));
 console.log(choices);
 var currentQuestion = {};
 var acceptingAnswers = false;
@@ -28,9 +28,10 @@ function startQuiz (event) {
  timeLeft = 60;
  isWin = false;
  //score is set to 0
+ questionCounter = 0;
  score = 0;
  //creates new array by referring to the existing array of questions
- availableQuestions = [...questions]
+ availableQuestions = [...questions];
  console.log(availableQuestions);
  timer()
  nextQuestion()
@@ -44,9 +45,9 @@ function nextQuestion() {
     currentQuestion = availableQuestions[qI];
     question.textContent = currentQuestion.question;
     //referencing html dataset
-    choices.forEach( choices => {
-        var number = choices.dataset;
-        choices.textContent = currentQuestion[`choices` + number];
+    choices.forEach( choice => {
+        var number = choice.dataset["number"];
+        choice.textContent = currentQuestion[`choice` + number];
     });
 
 }
