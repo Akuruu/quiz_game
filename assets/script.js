@@ -49,9 +49,23 @@ function nextQuestion() {
         var number = choice.dataset["number"];
         choice.textContent = currentQuestion[`choice` + number];
     });
+    //cuts out already answered questions
+    availableQuestions.splice(qI, 1);
 
+    acceptingAnswers = true;
 }
+//what happens when you click choice
+choices.forEach(choice => {
+    choice.addEventListener("click", event =>{
+        //if the answer the user clicked on was incorrect then ignore it
+        if (!acceptingAnswers) return;
+        acceptingAnswers = false;
+        var choiceEl = event.target;
+        var answerEl = choiceEl.dataset["number"];
 
+        nextQuestion();
+    });
+});
 //timer function
 function timer() {
     timer = setInterval(function() {
