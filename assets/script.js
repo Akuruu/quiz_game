@@ -7,7 +7,6 @@ var point = document.querySelector(".point");
 //---------------------------------
 var question = document.querySelector(".question");
 var choices = Array.from(document.getElementsByClassName("choice-text"));
-console.log(choices);
 var currentQuestion = {};
 var acceptingAnswers = false;
 var score = 0;
@@ -15,6 +14,7 @@ var score = 0;
 var availableQuestions = [];
 const correctPoint = 10;
 const totalQuestions = 10;
+var questionCounter = 0;
 //-------------------------------------
 var timer;
 var timeLeft;
@@ -32,7 +32,6 @@ function startQuiz (event) {
  score = 0;
  //creates new array by referring to the existing array of questions
  availableQuestions = [...questions];
- console.log(availableQuestions);
  timer()
  nextQuestion()
 }
@@ -66,13 +65,15 @@ choices.forEach(choice => {
         acceptingAnswers = false;
         const choiceEl = e.target;
         const answerEl = choiceEl.dataset["number"];
-        console.log(answerEl == currentQuestion.answer);
         //shows whether an answer is correct or incorrect
         var highlight = "incorrect";
         //if the current choice matches the answer
             if (answerEl == currentQuestion.answer) {
                 //register it as correct
                 highlight = "correct";
+            if (highlight === "correct") {
+                scoreUp(correctPoint);
+            }
             }
             //adds the highlight for the correct and incorrect choices
             choiceEl.parentElement.classList.add(highlight);
@@ -84,6 +85,12 @@ choices.forEach(choice => {
             }, 1000); 
     });
 })
+
+//score function
+function scoreUp (num) {
+    score  += num;
+    point.textContent = score;
+}
 
 //timer function
 function timer() {
