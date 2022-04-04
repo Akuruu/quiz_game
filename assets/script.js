@@ -3,6 +3,7 @@ var quizText = document.querySelector(".quiz");
 var startButton = document.querySelector(".start");
 var win = document.querySelector(".win");
 var lose = document.querySelector(".lose");
+var point = document.querySelector(".point");
 //---------------------------------
 var question = document.querySelector(".question");
 var choices = Array.from(document.getElementsByClassName("choice-text"));
@@ -10,14 +11,14 @@ console.log(choices);
 var currentQuestion = {};
 var acceptingAnswers = false;
 var score = 0;
-var questionCounter = 0;
 //new question array
 var availableQuestions = [];
+const correctPoint = 10;
+const totalQuestions = 10;
 //-------------------------------------
 var timer;
 var timeLeft;
 var isWin = false;
-var winNumber = 0;
 var loseNumber = 0;
 //--------------------------------------
 //calling the startQuiz function after the start button is pressed
@@ -28,18 +29,20 @@ function startQuiz (event) {
  timeLeft = 60;
  isWin = false;
  //score is set to 0
- questionCounter = 0;
  score = 0;
  //creates new array by referring to the existing array of questions
  availableQuestions = [...questions];
  console.log(availableQuestions);
  timer()
  nextQuestion()
- event.preventDefault()
 }
+
 //proceeds to the next question
 function nextQuestion() {
-    questionCounter++;
+    //if there's no more questions left then move to the game over screen
+    if (availableQuestions.length === 0 || questionCounter > totalQuestions){
+        return window.location.assign("/gameOver.html");
+    }
     //randomizes the questions
     var qI = Math.floor(Math.random() * availableQuestions.length);
     currentQuestion = availableQuestions[qI];
@@ -53,19 +56,35 @@ function nextQuestion() {
     availableQuestions.splice(qI, 1);
 
     acceptingAnswers = true;
-}
+};
+
 //what happens when you click choice
 choices.forEach(choice => {
-    choice.addEventListener("click", event =>{
+    choice.addEventListener("click", e => {
         //if the answer the user clicked on was incorrect then ignore it
         if (!acceptingAnswers) return;
         acceptingAnswers = false;
-        var choiceEl = event.target;
-        var answerEl = choiceEl.dataset["number"];
-
-        nextQuestion();
+        const choiceEl = e.target;
+        const answerEl = choiceEl.dataset["number"];
+        console.log(answerEl == currentQuestion.answer);
+        //shows whether an answer is correct or incorrect
+        var highlight = "incorrect";
+        //if the current choice matches the answer
+            if (answerEl == currentQuestion.answer) {
+                //register it as correct
+                highlight = "correct";
+            }
+            //adds the highlight for the correct and incorrect choices
+            choiceEl.parentElement.classList.add(highlight);
+            //sets a small delay before removing the highlight element
+            setTimeout( () => {
+            choiceEl.parentElement.classList.remove(highlight);
+            //proceeds to next question
+            nextQuestion();
+            }, 1000); 
     });
-});
+})
+
 //timer function
 function timer() {
     timer = setInterval(function() {
@@ -103,6 +122,7 @@ function gameLose() {
     //initiates lose counter
     setLosses()
 }
+
 
 //--------------------------
 var questions = [
@@ -188,5 +208,3 @@ var questions = [
     },
 ];
 
-const correctPoint = 10;
-const totalQuestions = 10;
