@@ -44,7 +44,7 @@ function nextQuestion() {
     var qI = Math.floor(Math.random() * availableQuestions.length);
     currentQuestion = availableQuestions[qI];
     question.textContent = currentQuestion.question;
-    //referencing html dataset
+    //referencing html dataset to displat answer choices
     choices.forEach( choice => {
         var number = choice.dataset["number"];
         choice.textContent = currentQuestion[`choice` + number];
