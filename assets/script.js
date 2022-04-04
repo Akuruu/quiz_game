@@ -40,7 +40,7 @@ function startQuiz (event) {
 function nextQuestion() {
     //if there's no more questions left then move to the game over screen
     if (availableQuestions.length === 0 || questionCounter > totalQuestions){
-        return window.location.assign("/gameOver.html");
+        return window.location.assign("./gameOver.html");
     }
     //randomizes the questions
     var qI = Math.floor(Math.random() * availableQuestions.length);
@@ -109,6 +109,7 @@ function timer() {
             gameLose();
         }
     }, 1000);
+
     console.log(timeLeft);
 }
 
