@@ -42,6 +42,14 @@ button {
     padding: 5px 15px;
 }
 
+form {
+    color: #1F1D36;
+    width: 100%;
+    height: auto;
+    padding: 2px;
+
+}
+
 .quiz{
     width: 500px;
     height: 600px;
