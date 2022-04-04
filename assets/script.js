@@ -5,9 +5,10 @@ var win = document.querySelector(".win");
 var lose = document.querySelector(".lose");
 //---------------------------------
 var question = document.querySelector(".question");
-var choices = document.querySelector(".choice-text");
+var choices = document.getElementsByClassName(".choice-text");
+console.log(choices);
 var currentQuestion = {};
-var acceptingAnswers = true;
+var acceptingAnswers = false;
 var score = 0;
 var questionCounter = 0;
 //new question array
@@ -23,7 +24,7 @@ var loseNumber = 0;
 startButton.addEventListener("click", startQuiz);
 //--------------------------------------
 //what happens when you hit the start button
-function startQuiz () {
+function startQuiz (event) {
  timeLeft = 60;
  isWin = false;
  //score is set to 0
@@ -33,6 +34,7 @@ function startQuiz () {
  console.log(availableQuestions);
  timer()
  nextQuestion()
+ event.preventDefault()
 }
 //proceeds to the next question
 function nextQuestion() {
@@ -40,7 +42,13 @@ function nextQuestion() {
     //randomizes the questions
     var qI = Math.floor(Math.random() * availableQuestions.length);
     currentQuestion = availableQuestions[qI];
-    question.innerHTML = currentQuestion.question;
+    question.textContent = currentQuestion.question;
+    //referencing html dataset
+    choices.forEach( choices => {
+        var number = choices.dataset;
+        choices.textContent = currentQuestion[`choices` + number];
+    });
+
 }
 
 //timer function

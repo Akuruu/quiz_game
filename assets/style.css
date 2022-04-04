@@ -80,3 +80,7 @@ button {
     font-size: 3.5em;
     text-align:center;
 }
+
+.win-loss-container {
+    display: none;
+}
