@@ -40,6 +40,7 @@ function startQuiz (event) {
 function nextQuestion() {
     //if there's no more questions left then move to the game over screen
     if (availableQuestions.length === 0 || questionCounter > totalQuestions){
+        localStorage.setItem("recentScore", score);
         return window.location.assign("./gameOver.html");
     }
     //randomizes the questions
@@ -99,9 +100,7 @@ function timer() {
         countdownEl.textContent = timeLeft;
         if (timeLeft >= 0) {
             if (isWin && timeLeft > 0) {
-                clearInterval(timer);
-                //initiates game win function
-                gameWin();
+                clearInterval(timer);      
             }
         }
         if (timeLeft === 0) {
@@ -109,30 +108,21 @@ function timer() {
             gameLose();
         }
     }, 1000);
-
-    console.log(timeLeft);
-}
-
-//win game function
-function gameWin() {
-winNumber++
-startButton.disabled = false;
-quizText.textContent = "Good Job! You're cultured :)";
-//initiates win counter
-setWins()
 }
 
 //lose game function
 function gameLose() {
     loseNumber++
     startButton.disabled = false;
-    quizText.textContent = "Aww, looks like someone needs to read more novels...";
-    //initiates lose counter
-    setLosses()
+    quizText.textContent = "Aww, Time ran out...";
+
+    setTimeout( () => {
+
+    window.location.assign("./gameOver.html");
+    }, 1000);
 }
 
-
-//--------------------------
+//Questions for quiz
 var questions = [
     {
         question: "What is the name of Xie Lian's spiritual device?",
@@ -216,3 +206,4 @@ var questions = [
     },
 ];
 
+// Referenced James Q Quick on youtube for certain functions https://www.youtube.com/watch?v=zZdQGs62cR8&list=PLDlWc9AfQBfZIkdVaOQXi1tizJeNJipEx&index=5

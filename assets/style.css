@@ -33,21 +33,32 @@ section {
     border-radius: 8px; 
 }
 
-button {
+button, .button {
     border-radius: 10px;
     color: #1F1D36;
     background-color: #E9A6A6;
     font-size: 30px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     padding: 5px 15px;
+    margin-bottom: 20px;
+    text-decoration: none;
+
 }
 
 form {
     color: #1F1D36;
     width: 100%;
-    height: auto;
-    padding: 2px;
+}
 
+input {
+    width: 200px;
+    height: 50px;
+    font-size: 25px;
+}
+
+.button:hover {
+    background-color: #864879;
+    opacity: 50%;
 }
 
 .quiz{
@@ -102,7 +113,7 @@ form {
     text-align:center;
 }
 
-.scoreboard, #highscore {
+.scoreboard, #highscore-text {
     color:#E9A6A6;
     border-bottom: 1px solid #E9A6A6;
 }

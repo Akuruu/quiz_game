@@ -12,16 +12,17 @@
         <div class="container quiz">
             <div class="gameOver"> </div>
             <h1 class="scoreboard">Scoreboard</h1>
-            <p class="highscore" id="highscore">0</p>
+            <p class="highscore finalScore" id="highscore-text"></p>
             <form>
-                <input type="text" name="player" id="username" placeholder="player">
+                <input type="text" name="player" id="username" placeholder="player initials">
                 <button type="submit" class="saveScore" onclick="saveFinalScore">
                     Save Score
                 </button>
             </form>
+            <a class="button" href="./index.html">Play Again?</a>
         </div>
 
     </section>
-    <script src="./assets/script.js"></script>
+    <script src="./assets/gameOver.js"></script>
 </body>
 </html>
